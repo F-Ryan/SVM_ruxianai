@@ -1,0 +1,12 @@
+SOB/phyllodes_tumor/SOB_B_PT_14-22704/200X : 42
+SOB/phyllodes_tumor/SOB_B_PT_14-22704/400X : 39
+SOB/phyllodes_tumor/SOB_B_PT_14-22704/100X : 39
+SOB/phyllodes_tumor/SOB_B_PT_14-22704/40X : 38
+SOB/phyllodes_tumor/SOB_B_PT_14-21998AB/200X : 52
+SOB/phyllodes_tumor/SOB_B_PT_14-21998AB/400X : 59
+SOB/phyllodes_tumor/SOB_B_PT_14-21998AB/100X : 66
+SOB/phyllodes_tumor/SOB_B_PT_14-21998AB/40X : 58
+SOB/phyllodes_tumor/SOB_B_PT_14-29315EF/200X : 14
+SOB/phyllodes_tumor/SOB_B_PT_14-29315EF/400X : 17
+SOB/phyllodes_tumor/SOB_B_PT_14-29315EF/100X : 16
+SOB/phyllodes_tumor/SOB_B_PT_14-29315EF/40X : 13
