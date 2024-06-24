@@ -1,66 +1,36 @@
-from PIL import Image
-import numpy as np
 import os
+import SimpleITK as sitk
 
-my_root_dir = '/home/lei/svm/BreaKHis_v1/histology_slides/breast' 
-label_dict = {'benign': 1, 'malignant': 2}  
 
-def get_fifth_dirname(dirpath):  
-    # 初始化目录计数器和当前目录名  
-    count = 0  
-    current_dir = ''  
-  
-    # 使用 os.path.split() 迭代地分解路径  
-    while True:  
-        dirpath, dirname = os.path.split(dirpath)  
-          
-        # 递增计数器  
-        count += 1  
-          
-        # 保存当前目录名  
-        current_dir = dirname  
-          
-        # 如果到达根目录或已经找到第5个目录，则停止迭代  
-        if not dirname or count == 5:  
-            break  
-      
-    # 如果计数器未达到5，则返回None或抛出异常  
-    if count < 5:  
-        return None  # 或者可以抛出异常：raise ValueError("Path does not contain 7 directories")  
-      
-    # 返回第7个目录名  
-    return current_dir  
-  
+def get_using_image(source_path , output_path):
+   
+# 定义源文件夹和目标文件夹
+    src_directory = source_path
+    dst_directory = output_path
 
-def get_name_and_label(root_dir):
-    # 遍历目录树  
-     
-    for dirpath, dirnames, filenames in os.walk(root_dir):
-        if not filenames:
-            continue
-            
-        for filename in filenames:  
-            
-            if filename.lower().endswith(('.jpg', '.jpeg', '.png')):  
-                file_path = os.path.join(dirpath, filename)        
-                dir_basename = get_fifth_dirname(dirpath)  
-                  
-                  
-                if dir_basename in label_dict:
-                    label = label_dict[dir_basename]
-                    image_name.append(dir_basename)
-                    image_paths.append(file_path)  
-                    labels.append(label)
+# 确保目标文件夹存在
+    if not os.path.exists(dst_directory):
+        os.makedirs(dst_directory)
 
-    return image_paths, labels, image_name
+# 遍历源文件夹及其所有子文件夹
+    for dirpath, dirnames, filenames in os.walk(src_directory):
+        for filename in filenames:
+            # 检查文件扩展名是否为PNG
+            if filename.lower().endswith('.png'):
+                # 构建源文件和目标文件的完整路径
+                src_file_path = os.path.join(dirpath, filename)
+                # 从文件名中移除扩展名，并添加新的.nrrd扩展名
+                dst_file_name = os.path.splitext(filename)[0] + '.nrrd'
+                dst_file_path = os.path.join(dst_directory, dst_file_name)
+                # 读取PNG图像并将其保存为NRRD格式
+                itk_image = sitk.ReadImage(src_file_path)
+                sitk.WriteImage(itk_image, dst_file_path)   
 
-def get_images_from_paths(image_paths):  
-    img_list = []  
-    for file_path in image_paths:  
-        if os.path.isfile(file_path) and file_path.lower().endswith('.png'):  
-            with Image.open(file_path) as img:  
-                img_list.append(img)  
-    return img_list
-    
+    return 0
+                
+source_image_path = '/home/lei/SVM_ruxianai/histology_slides/breast'    
+output_image_path = '/home/lei/SVM_ruxianai/test_one/image'
+
+get_using_image(image_path,output_image_path)
 
 
