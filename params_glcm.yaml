@@ -17,7 +17,7 @@ imageType:
 
 featureClass:
   shape:  
-  #glcm: 
-  #glrlm:
-  #glszm:
-  #gldm:
+  glcm: 
+  glrlm:
+  glszm:
+  gldm:
